@@ -35,10 +35,21 @@ window.addEventListener('click', function(event) {
 });
 
 // Dark mode
-const checkbox = document.querySelector('#toggle');
-        const html = document.querySelector('html');
+const darkToggle = document.querySelector('#dark-toggle');
+const html = document.querySelector('html');
+  darkToggle.addEventListener('click', function() {
+    if (darkToggle.checked) {
+      html.classList.add('dark');
+      localStorage.theme = 'dark';
+    } else {
+      html.classList.remove('dark');
+      localStorage.theme = 'light';
+    }
+  });
 
-        checkbox.addEventListener('click', function()
-        {
-            checkbox.checked ? html.classList.add('dark') : html.classList.remove('dark');
-        });
+  // Pindahkan Posisi toggle sesuai mode
+  if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme:dark)').matches)) {
+    darkToggle.checked = true;
+  } else {
+    darkToggle.checked = false;
+  }
